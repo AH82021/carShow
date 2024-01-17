@@ -1,6 +1,7 @@
 package com.binary.carShow.service;
 
 import com.binary.carShow.entity.Car;
+import com.binary.carShow.exception.ResourceNotFoundException;
 import com.binary.carShow.repository.CarRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -26,13 +27,16 @@ public class CarServiceImpl implements CarService{
 
     @Override
     public Car getCarById(Long id) {
-           Optional<Car> optionalCar =  carRepository.findById(id);
+//           Optional<Car> optionalCar =  carRepository.findById(id);
+//
+//           if(optionalCar.isPresent()) {
+//               return optionalCar.get();
+//           } else  {
+//               throw new ResourceNotFoundException("Car with id " + id + " not found");
+//           }
 
-           if(optionalCar.isPresent()) {
-               return optionalCar.get();
-           } else  {
-               throw new EntityNotFoundException("Car with id " + id + " not found");
-           }
+      return carRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Car with id"+ id+ " not found."));
 
 
     }
@@ -65,7 +69,10 @@ public class CarServiceImpl implements CarService{
 
     }
 
-
+    @Override
+    public List<Car> getCarByMake(String make) {
+        return carRepository.getAllCarByMake(make);
+    }
 
 
 }

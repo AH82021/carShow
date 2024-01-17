@@ -25,6 +25,9 @@ public interface CarRepository  extends CrudRepository<Car,Long> {
     //     getAllCarByMake(String make);
 
 
+    List<Car> getAllCarByMake(String make);
+
+
 
 
 

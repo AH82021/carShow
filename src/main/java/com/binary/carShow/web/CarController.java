@@ -2,11 +2,10 @@ package com.binary.carShow.web;
 
 import com.binary.carShow.entity.Car;
 import com.binary.carShow.service.CarService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,6 +44,10 @@ public class CarController {
 @PutMapping("/{id}")
     public ResponseEntity<Car> updateCarById(@PathVariable Long id, @RequestBody Car car){
         return new ResponseEntity<>(carService.updateCarById(id,car),HttpStatus.ACCEPTED);
+    }
+    @GetMapping("/make/{make}")
+    public ResponseEntity<List<Car>> getCarListByMake(@PathVariable String make){
+        return new ResponseEntity<>(carService.getCarByMake(make),HttpStatus.OK);
     }
 
 
