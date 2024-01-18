@@ -2,9 +2,11 @@ package com.binary.carShow;
 
 import com.binary.carShow.entity.Car;
 import com.binary.carShow.entity.Owner;
+import com.binary.carShow.entity.User;
 import com.binary.carShow.exception.ApiError;
 import com.binary.carShow.repository.CarRepository;
 import com.binary.carShow.repository.OwnerRepository;
+import com.binary.carShow.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ public class CarShowApplication implements CommandLineRunner {
 	private CarRepository carRepository;
 	@Autowired
 	private OwnerRepository ownerRepository;
+	@Autowired
+	private UserRepository userRepository;
 private static final Logger logger = LoggerFactory.getLogger(CarShowApplication.class);
 	public static void main(String[] args) {
 
@@ -53,6 +57,9 @@ private static final Logger logger = LoggerFactory.getLogger(CarShowApplication.
 				new Car("Honda","Accord","White","HW-345",2024,57000,owner2)
 		);
 		carRepository.saveAll(cars);
+
+		userRepository.save(new User("user","$2y$10$fYxfGWfalVkOZngN2N9fg.YwliPc0yhAwud2qFTTjR2q1kR94MbSu","USER"));
+		userRepository.save(new User("admin","$2y$10$FDa296CfofAIC2Jiz13mLeF9JVNu4gIOJa3CJCoX5oSDv4D7o.Qxu","ADMIN"));
 
 
 		carRepository.
